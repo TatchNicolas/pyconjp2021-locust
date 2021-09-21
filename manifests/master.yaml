@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: locust-master
+  labels:
+    app: locust
+    role: master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: locust
+      role: master
+  template:
+    metadata:
+      labels:
+        app: locust
+        role: master
+    spec:
+      containers:
+      - name: locust
+        image: locustio/locust
+        ports:
+        - containerPort: 5557
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 250m
+          limits:
+            memory: 256Mi
+            cpu: 500m
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: locust-master
+spec:
+  selector:
+    app: locust
+    role: master
+  ports:
+    - protocol: TCP
+      port: 5557
+      targetPort: 5557
