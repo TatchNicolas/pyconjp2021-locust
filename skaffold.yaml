@@ -1,18 +1,20 @@
 apiVersion: skaffold/v2beta21
 kind: Config
+metadata:
+  name: pyconjp--locust
 build:
   artifacts:
-    - image: pyconjp2021-sample
-      docker:
-        dockerfile: ./Dockerfile
-  tagPolicy:
-    gitCommit: {}
-  local:
-    concurrency: 1
-
+  - image: tatchnicolas/pyconjp2021-app
+    docker:
+      dockerfile: Dockerfile
 deploy:
   kubectl:
     manifests:
-      - ./k8s/deployment.yaml
-  logs:
-    prefix: container
+    - manifests/master.yaml
+    - manifests/webserver.yaml
+    - manifests/worker.yaml
+portForward:
+- resourceType: service
+  resourceName: sample-app-svc
+  port: 8000
+  localPort: 8000

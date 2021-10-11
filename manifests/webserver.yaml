@@ -18,7 +18,7 @@ spec:
       - name: app
         image: TatchNicolas/pyconjp2021-app
         ports:
-        - containerPort: 5557
+        - containerPort: 8000
         resources:
           requests:
             memory: 128Mi
@@ -36,5 +36,5 @@ spec:
     app: sample-app
   ports:
     - protocol: TCP
-      port: 5557
-      targetPort: 5557
+      port: 8000
+      targetPort: 8000
