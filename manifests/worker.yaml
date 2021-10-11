@@ -6,7 +6,7 @@ metadata:
     app: locust
     role: worker
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: locust
@@ -20,10 +20,10 @@ spec:
       containers:
       - name: locust
         image: tatchnicolas/pyconjp2021-app
-        command: ["--worker", "-f", "locustfile.py"]
+        command: ["locust", "--worker"]
         env:
-          - name: LOCUST_LOCUSTFILE
-            value: locustfile.py
+          # - name: LOCUST_LOCUSTFILE
+          #   value: locustfile.py
           - name: LOCUST_MASTER_NODE_HOST
             value: locust-master-svc
         resources:
