@@ -22,8 +22,6 @@ spec:
         image: tatchnicolas/pyconjp2021-app
         command: ["locust", "--worker"]
         env:
-          # - name: LOCUST_LOCUSTFILE
-          #   value: locustfile.py
           - name: LOCUST_MASTER_NODE_HOST
             value: locust-master-svc
         resources:
