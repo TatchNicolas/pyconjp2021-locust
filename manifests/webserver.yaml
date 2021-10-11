@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-app
+  labels:
+    app: sample-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-app
+  template:
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+      - name: app
+        image: TatchNicolas/pyconjp2021-app
+        ports:
+        - containerPort: 5557
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 250m
+          limits:
+            memory: 256Mi
+            cpu: 500m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sample-app-svc
+spec:
+  selector:
+    app: sample-app
+  ports:
+    - protocol: TCP
+      port: 5557
+      targetPort: 5557

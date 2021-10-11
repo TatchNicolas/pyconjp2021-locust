@@ -1,0 +1,18 @@
+apiVersion: skaffold/v2beta21
+kind: Config
+build:
+  artifacts:
+    - image: pyconjp2021-sample
+      docker:
+        dockerfile: ./Dockerfile
+  tagPolicy:
+    gitCommit: {}
+  local:
+    concurrency: 1
+
+deploy:
+  kubectl:
+    manifests:
+      - ./k8s/deployment.yaml
+  logs:
+    prefix: container
