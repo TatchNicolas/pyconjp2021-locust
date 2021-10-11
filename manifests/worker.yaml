@@ -1,22 +1,20 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
   name: locust-worker
   labels:
     app: locust
     role: worker
 spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: locust
-      role: worker
+  completions: 2
+  parallelism: 2
   template:
     metadata:
       labels:
         app: locust
         role: worker
     spec:
+      restartPolicy: OnFailure
       containers:
       - name: locust
         image: tatchnicolas/pyconjp2021-app
