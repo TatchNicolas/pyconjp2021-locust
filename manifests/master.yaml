@@ -20,16 +20,11 @@ spec:
       containers:
       - name: locust
         image: tatchnicolas/pyconjp2021-app
-        command: ["locust", "--master", "--headless"]
-        env:
-          - name: LOCUST_EXPECT_WORKERS
-            value: "2"
-          - name: LOCUST_CONFIG
-            value: /var/locust/locust.conf
+        command: ["locust", "--master", "--config", "/var/locust/locust.conf"]
         ports:
         - containerPort: 5557
         volumeMounts:
-        - mountPath: /var/locust/locust.conf
+        - mountPath: /var/locust/
           readOnly: true
           name: locust-conf
         resources:
@@ -43,9 +38,6 @@ spec:
       - name: locust-conf
         configMap:
           name: locust-master-conf
-          items:
-            - key: locust.conf
-              path: locust.conf
 ---
 apiVersion: v1
 kind: Service
@@ -69,10 +61,7 @@ data:
     headless = true
     expect-workers = 2
     locustfile = ./locustfile.py
-
     host = http://sample-app-svc:8000
-
     users = 50
     spawn-rate = 10
-
     run-time = 1m
