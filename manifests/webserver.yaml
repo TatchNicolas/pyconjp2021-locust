@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: app
-        image: TatchNicolas/pyconjp2021-app
+        image: tatchnicolas/pyconjp2021-app
+        command: ["uvicorn", "sample_app:app", "--port", "8000"]
         ports:
         - containerPort: 8000
         resources:

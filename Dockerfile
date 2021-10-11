@@ -12,4 +12,4 @@ RUN poetry install
 
 COPY sample_app/ sample_app/
 
-CMD ["uvicorn", "sample_app:app", "--port", "8000"]
+ENTRYPOINT [""]

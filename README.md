@@ -5,3 +5,7 @@
 https://2021.pycon.jp/time-table/?id=269708
 
 ## 環境構築 / setup
+
+```
+skaffold dev
+```

@@ -19,7 +19,13 @@ spec:
     spec:
       containers:
       - name: locust
-        image: locustio/locust
+        image: tatchnicolas/pyconjp2021-app
+        command: ["--worker", "-f", "locustfile.py"]
+        env:
+          - name: LOCUST_LOCUSTFILE
+            value: locustfile.py
+          - name: LOCUST_MASTER_NODE_HOST
+            value: locust-master-svc
         resources:
           requests:
             memory: 128Mi

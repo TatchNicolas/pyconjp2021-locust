@@ -19,7 +19,13 @@ spec:
     spec:
       containers:
       - name: locust
-        image: locustio/locust
+        image: tatchnicolas/pyconjp2021-app
+        command: ["--master"]
+        env:
+          - name: LOCUST_LOCUSTFILE
+            value: locustfile.py
+          - name: LOCUST_EXPECT_WORKERS
+            value: "2"
         ports:
         - containerPort: 5557
         resources:
@@ -34,7 +40,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: locust-master
+  name: locust-master-svc
 spec:
   selector:
     app: locust
