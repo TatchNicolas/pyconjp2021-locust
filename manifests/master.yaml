@@ -59,6 +59,6 @@ data:
     expect-workers = 2
     locustfile = ./locustfile.py
     host = http://sample-app-svc:8000
-    users = 50
+    users = 1
     spawn-rate = 10
-    run-time = 1m
+    run-time = 10s
