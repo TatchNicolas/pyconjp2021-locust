@@ -1,4 +1,5 @@
 import time
+import logging
 import uuid
 
 from locust import HttpUser, task, between, events
@@ -8,16 +9,16 @@ from locust.runners import MasterRunner
 @events.test_start.add_listener
 def on_test_start(environment, **kwargs):
     if not isinstance(environment.runner, MasterRunner):
-        print("Beginning test setup")
+        logging.info("Beginning test setup")
     else:
-        print("Started test from Master node")
+        logging.info("Started test from Master node")
 
 @events.test_stop.add_listener
 def on_test_stop(environment, **kwargs):
     if not isinstance(environment.runner, MasterRunner):
-        print("Cleaning up test data")
+        logging.info("Cleaning up test data")
     else:
-        print("Stopped test from Master node")
+        logging.info("Stopped test from Master node")
 
 
 class LoadTestUser(HttpUser):
