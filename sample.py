@@ -10,7 +10,7 @@ from starlette.status import HTTP_400_BAD_REQUEST
 APP_MONGO_URL = os.environ["APP_MONGO_URL"]
 
 db = MongoClient(APP_MONGO_URL).get_default_database()
-user_col = db[APP_MONGO_URL]
+user_col = db["users"]
 
 class User(BaseModel):
     name: str
