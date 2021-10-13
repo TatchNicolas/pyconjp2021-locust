@@ -10,6 +10,7 @@ locust = "^2.2.3"
 fastapi = "^0.70.0"
 uvicorn = "^0.15.0"
 boto3 = "^1.18.60"
+pymongo = "^3.12.0"
 
 [tool.poetry.dev-dependencies]
 black = {version = "^21.9b0", allow-prereleases = true}

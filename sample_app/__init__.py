@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from sample_app.config import APP_MONGO_URL
 from sample_app.models import Login
 
 app = FastAPI()
