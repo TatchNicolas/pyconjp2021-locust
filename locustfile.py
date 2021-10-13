@@ -1,12 +1,11 @@
-import time
 import logging
-import uuid
 
-from locust import HttpUser, task, between, events
+from locust import HttpUser, between, events, task
 from locust.runners import MasterRunner
+from locust.stats import console_logger
+from locust_plugins.users import RestUser
 
 # You can supress tables in log by disabling stats logger
-from locust.stats import console_logger
 console_logger.disabled = True
 
 
@@ -19,6 +18,7 @@ def on_test_start(environment, **kwargs):
         logging.info("Setting up database...")
         logging.info("finished")
 
+
 @events.test_stop.add_listener
 def on_test_stop(environment, **kwargs):
     if not isinstance(environment.runner, MasterRunner):
@@ -27,20 +27,33 @@ def on_test_stop(environment, **kwargs):
         logging.info("Stopped test from Master node")
 
 
-class LoadTestUser(HttpUser):
+class AnonymousUser(HttpUser):
     wait_time = between(1, 5)
 
     @task
     def hello_world(self):
-        self.client.get("/")
+        with self.client.post(
+            "/auth",
+            json={"name": "non-existent user", "password": "password1234"},
+            catch_response=True,
+        ) as resp:
+            if resp.status_code == 403:
+                resp.success()
+            else:
+                resp.failure()
 
-    # @task(3)
-    # def view_items(self):
-    #     for item_id in range(10):
-    #         self.client.get(f"/item?id={item_id}", name="/item")
-    #         time.sleep(1)
 
-    def on_start(self):
-        user_id = str(uuid.uuid4())
-        self.client.post("/login", json={"user_id": user_id, "password":"password"})
- 
+class ExistingUser(RestUser):
+    wait_time = between(1, 5)
+
+    @task
+    def hello_world(self):
+        with self.client.post(
+            "/auth",
+            json={"name": "non-existent user", "password": "password1234"},
+            catch_response=True,
+        ) as resp:
+            if resp.status_code == 403:
+                resp.success()
+            else:
+                resp.failure()
