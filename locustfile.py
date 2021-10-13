@@ -5,6 +5,10 @@ import uuid
 from locust import HttpUser, task, between, events
 from locust.runners import MasterRunner
 
+# You can supress tables in log by disabling stats logger
+from locust.stats import console_logger
+console_logger.disabled = True
+
 
 @events.test_start.add_listener
 def on_test_start(environment, **kwargs):
@@ -12,6 +16,8 @@ def on_test_start(environment, **kwargs):
         logging.info("Beginning test setup")
     else:
         logging.info("Started test from Master node")
+        logging.info("Setting up database...")
+        logging.info("finished")
 
 @events.test_stop.add_listener
 def on_test_stop(environment, **kwargs):

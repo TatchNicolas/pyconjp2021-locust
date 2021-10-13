@@ -9,7 +9,7 @@ def get_user():
     return "Hi"
 
 
-@app.get("/users")
+@app.post("/users")
 def get_user():
     return "Hi"
 

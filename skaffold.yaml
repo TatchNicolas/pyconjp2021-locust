@@ -11,8 +11,9 @@ deploy:
   kubectl:
     manifests:
     - manifests/master.yaml
-    - manifests/webserver.yaml
     - manifests/worker.yaml
+    - manifests/sample_app.yaml
+    - manifests/database.yaml
 portForward:
 - resourceType: service
   resourceName: sample-app-svc

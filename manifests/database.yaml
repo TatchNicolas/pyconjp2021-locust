@@ -1,38 +1,35 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
   name: mongo
   labels:
     app: mongo
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: mongo
-  template:
-    metadata:
-      labels:
-        app: mongo
-    spec:
-      containers:
-      - name: mongo
-        image: mongo:4.4
-        command: ["--smallfiles", "--setParameter", "failIndexKeyTooLong=false"]
-        containerPort: 27019
-        env:
-          - name: MONGO_INITDB_ROOT_USERNAME
-            value: root
-          - name: MONGO_INITDB_ROOT_PASSWORD
-            value: example
-          - name: MONGO_INITDB_DATABASE
-            value: loadtest
-        resources:
-          requests:
-            memory: 128Mi
-            cpu: 250m
-          limits:
-            memory: 256Mi
-            cpu: 500m
+  containers:
+  - name: mongo
+    image: mongo:4.4
+    ports:
+    - containerPort: 27019
+    env:
+      - name: MONGO_INITDB_ROOT_USERNAME
+        value: root
+      - name: MONGO_INITDB_ROOT_PASSWORD
+        value: example
+      - name: MONGO_INITDB_DATABASE
+        value: loadtest
+    resources:
+      requests:
+        memory: 128Mi
+        cpu: 250m
+      limits:
+        memory: 256Mi
+        cpu: 500m
+    volumeMounts:
+      - mountPath: /data/db
+        name: storage
+  volumes:
+    - name: storage
+      emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
