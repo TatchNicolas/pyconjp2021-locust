@@ -20,8 +20,11 @@ app = FastAPI()
 
 
 @app.get("/")
-def top(name: Optional[str] = Cookie(None)):
-    return {"name": name}
+def top(resp: Response, name: Optional[str] = Cookie(None)):
+    if name:
+        return {"name": name}
+    resp.status_code = status.HTTP_403_FORBIDDEN
+    return {"message": "please login via /auth"}
 
 
 @app.post("/users")

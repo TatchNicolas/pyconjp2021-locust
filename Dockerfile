@@ -11,6 +11,7 @@ COPY poetry.lock poetry.lock
 RUN poetry install
 
 COPY locustfile.py locustfile.py
-COPY sample.py sample.py
+COPY users.json users.json
+COPY sample/ sample/
 
 ENTRYPOINT [""]

@@ -6,8 +6,8 @@ metadata:
     app: locust
     role: worker
 spec:
-  completions: 2
-  parallelism: 2
+  completions: 5
+  parallelism: 5
   template:
     metadata:
       labels:
@@ -22,6 +22,10 @@ spec:
         env:
           - name: LOCUST_MASTER_NODE_HOST
             value: locust-master-svc
+          - name: APP_MONGO_URL
+            value: mongodb://root:example@mongo-svc:27017/local?authSource=admin
+          - name: APP_MONGO_USER_COL  
+            value: users
         resources:
           requests:
             memory: 128Mi

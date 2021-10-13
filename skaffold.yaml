@@ -1,7 +1,7 @@
 apiVersion: skaffold/v2beta21
 kind: Config
 metadata:
-  name: pyconjp--locust
+  name: pyconjp-locust
 build:
   artifacts:
   - image: tatchnicolas/pyconjp2021-app

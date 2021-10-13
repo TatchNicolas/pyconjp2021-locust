@@ -18,6 +18,11 @@ spec:
       - name: locust
         image: tatchnicolas/pyconjp2021-app
         command: ["locust", "--master", "--config", "/var/locust/locust.conf"]
+        env:
+        - name: APP_MONGO_URL
+          value: mongodb://root:example@mongo-svc:27017/local?authSource=admin
+        - name: APP_MONGO_USER_COL  
+          value: users
         ports:
         - containerPort: 5557
         volumeMounts:
@@ -56,9 +61,9 @@ metadata:
 data:
   locust.conf: |
     headless = true
-    expect-workers = 2
+    expect-workers = 5
     locustfile = ./locustfile.py
     host = http://sample-app-svc:8000
-    users = 1
-    spawn-rate = 10
-    run-time = 10s
+    users = 5
+    spawn-rate = 2
+    run-time = 1m
