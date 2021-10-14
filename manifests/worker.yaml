@@ -26,10 +26,3 @@ spec:
             value: mongodb://root:example@mongo-svc:27017/loadtest?authSource=admin
           - name: APP_MONGO_USER_COL  
             value: users
-        # resources:
-        #   requests:
-        #     memory: 512Mi
-        #     cpu: 500m
-        #   limits:
-        #     memory: 1Gi
-        #     cpu: 1000m

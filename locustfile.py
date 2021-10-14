@@ -8,7 +8,7 @@ from locust_plugins.users import RestUser
 
 from sample.database import setup_initial_data, teardown_database
 
-# You can supress tables in log by disabling stats logger
+# You can suppress tables in log by disabling stats logger
 console_logger.disabled = True
 
 logger = logging.getLogger(__name__)
