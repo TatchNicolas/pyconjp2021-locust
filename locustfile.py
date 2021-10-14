@@ -41,8 +41,9 @@ def on_test_stop(environment, **kwargs):
         logger.info("Finish tearing down from worker")
 
 
-class AuthenticatedUser(RestUser):
-    wait_time = between(1, 5)
+class AuthenticatedUser(HttpUser):
+
+    wait_time = between(1,5)
 
     def __init__(self, environment):
         self.name = None
@@ -50,19 +51,17 @@ class AuthenticatedUser(RestUser):
 
     def on_start(self):
         if len(USERS) > 0:
-            print("hoge")
             user = USERS.pop()
             logger.info(f"popped user: {user}")
             self.name = user["name"]
-            self.rest(
-                "POST",
+            self.client.post(
                 "/auth",
                 json={"name": user["name"], "password": user["password"]},
             )
 
     @task
-    def hello_world(self):
-        with self.rest("GET", "/") as resp:
-            print(resp.json())
-            print(resp.js)
-            pass
+    def get_name(self):
+        with self.client.get("/") as resp:
+            if resp.json()["name"] != self.name:
+                logger.warning("not match")
+                resp.failure()

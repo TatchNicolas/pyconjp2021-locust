@@ -17,13 +17,13 @@ spec:
         value: example
       - name: MONGO_INITDB_DATABASE
         value: loadtest
-    resources:
-      requests:
-        memory: 128Mi
-        cpu: 250m
-      limits:
-        memory: 256Mi
-        cpu: 500m
+    # resources:
+    #   requests:
+    #     memory: 128Mi
+    #     cpu: 250m
+    #   limits:
+    #     memory: 256Mi
+    #     cpu: 500m
   #   volumeMounts:
   #     - mountPath: /data/db
   #       name: storage
