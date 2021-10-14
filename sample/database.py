@@ -11,5 +11,6 @@ def setup_initial_data():
     with open("users.json", "r") as f:
         user_col.insert_many(json.load(f))
 
+
 def teardown_database():
     db[APP_MONGO_USER_COL].drop()

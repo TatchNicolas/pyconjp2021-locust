@@ -11,7 +11,7 @@ from sample.database import setup_initial_data, teardown_database
 # You can supress tables in log by disabling stats logger
 console_logger.disabled = True
 
-logger =logging.getLogger(__name__)
+logger = logging.getLogger(__name__)
 
 with open("users.json", "r") as f:
     USERS = json.load(f)
@@ -43,7 +43,7 @@ def on_test_stop(environment, **kwargs):
 
 class AuthenticatedUser(HttpUser):
 
-    wait_time = between(1,5)
+    wait_time = between(1, 5)
 
     def __init__(self, environment):
         self.name = None
@@ -56,7 +56,10 @@ class AuthenticatedUser(HttpUser):
             self.name = user["name"]
             self.client.post(
                 "/auth",
-                json={"name": user["name"], "password": user["password"]},
+                json={
+                    "name": user["name"],
+                    "password": user["password"],
+                },
             )
 
     @task
