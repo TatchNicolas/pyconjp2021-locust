@@ -19,19 +19,19 @@ spec:
         image: tatchnicolas/pyconjp2021-app
         env:
         - name: APP_MONGO_URL
-          value: mongodb://root:example@mongo-svc:27017/local?authSource=admin
+          value: mongodb://root:example@mongo-svc:27017/loadtest?authSource=admin
         - name: APP_MONGO_USER_COL  
           value: users
         command: ["uvicorn", "sample:app", "--host", "0.0.0.0", "--port", "8000"]
         ports:
         - containerPort: 8000
-        resources:
-          requests:
-            memory: 128Mi
-            cpu: 250m
-          limits:
-            memory: 256Mi
-            cpu: 500m
+        # resources:
+        #   requests:
+        #     memory: 128Mi
+        #     cpu: 250m
+        #   limits:
+        #     memory: 256Mi
+        #     cpu: 500m
 ---
 apiVersion: v1
 kind: Service

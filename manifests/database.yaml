@@ -24,12 +24,12 @@ spec:
       limits:
         memory: 256Mi
         cpu: 500m
-    volumeMounts:
-      - mountPath: /data/db
-        name: storage
-  volumes:
-    - name: storage
-      emptyDir: {}
+  #   volumeMounts:
+  #     - mountPath: /data/db
+  #       name: storage
+  # volumes:
+  #   - name: storage
+  #     emptyDir: {}
 ---
 apiVersion: v1
 kind: Service
