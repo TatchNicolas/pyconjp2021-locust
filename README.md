@@ -4,8 +4,20 @@
 
 https://2021.pycon.jp/time-table/?id=269708
 
-## 環境構築 / setup
+## How to run the sample
 
+```sh
+kind create cluster --config ./kind.yaml
 ```
-skaffold dev
+
+### kubectlで動かす / Run with kubectl
+
+```sh
+kubectl apply -f manifests/
+```
+
+### kindで動かす / Run with kind
+
+```sh
+skaffold run
 ```

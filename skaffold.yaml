@@ -20,3 +20,7 @@ portForward:
   resourceName: sample-app-svc
   port: 8000
   localPort: 8000
+- resourceType: service
+  resourceName: locust-result-svc
+  port: 8080
+  localPort: 8080

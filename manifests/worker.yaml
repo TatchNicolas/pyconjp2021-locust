@@ -16,7 +16,7 @@ spec:
     spec:
       restartPolicy: OnFailure
       containers:
-      - name: locust
+      - name: locust-worker
         image: tatchnicolas/pyconjp2021-app
         command: ["locust", "--worker"]
         env:
