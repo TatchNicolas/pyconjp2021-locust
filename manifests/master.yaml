@@ -17,7 +17,11 @@ spec:
       containers:
       - name: locust
         image: tatchnicolas/pyconjp2021-app
-        command: ["locust", "--master", "--config", "/var/locust/locust.conf"]
+        command: 
+        - "locust"
+        - "--master"
+        - "--config"
+        - "/var/locust/locust.conf"
         env:
         - name: APP_MONGO_URL
           value: mongodb://root:example@mongo-svc:27017/loadtest?authSource=admin
@@ -29,13 +33,6 @@ spec:
         - mountPath: /var/locust/
           readOnly: true
           name: locust-conf
-        # resources:
-        #   requests:
-        #     memory: 128Mi
-        #     cpu: 250m
-        #   limits:
-        #     memory: 256Mi
-        #     cpu: 500m
       volumes:
       - name: locust-conf
         configMap:

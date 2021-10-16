@@ -8,6 +8,7 @@ build:
     docker:
       dockerfile: Dockerfile
 deploy:
+  kubeContext: kind-pyconjp2021-locust
   kubectl:
     manifests:
     - manifests/master.yaml

@@ -45,10 +45,6 @@ class AuthenticatedUser(HttpUser):
 
     wait_time = between(1, 5)
 
-    def __init__(self, environment):
-        self.name = None
-        super().__init__(environment)
-
     def on_start(self):
         if len(USERS) > 0:
             user = USERS.pop()
